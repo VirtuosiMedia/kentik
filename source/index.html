@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kentik Application Project</title>
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/icons.css">
+	<script type="text/javascript" src="assets/javascript/utilities.js"></script>
+	<script type="text/javascript" src="assets/javascript/autocomplete.js"></script>
+	<script type="text/javascript" src="assets/javascript/select.js"></script>
+	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
+</head>
+<body>
+	<div id="navWrapper">
+		<div id="nav">
+			<a id="logo" href="../"></a>
+			<span id="dropdownTrigger" tabindex="0">
+				<span id="userBackground"><i class="icon icon-user"></i></span>
+				<span id="userName">Benjamin Kuker &#9660;</span>
+				<ul id="dropdown">
+					<li><a href="http://www.junctiongate.com/" target="_blank">Junction Gate Website</a></li>
+					<li><a href="http://play.junctiongate.com/" target="_blank">Junction Gate Beta</a></li>
+					<li><a href="http://alpha.junctiongate.com/" target="_blank">Junction Gate Alpha</a></li>
+					<li><a href="https://github.com/VirtuosiMedia" target="_blank">GitHub Profile</a></li>
+					<li><a href="http://stackexchange.com/users/7618/virtuosimedia?tab=accounts" target="_blank">StackOverflow Profile</a></li>
+				</ul>
+			</span>
+		</div>
+	</div>
+	<div id="mainWrapper">
+		<div id="main">
+			<h1>Impaired Crashes</h1>
+			<ul id="filters">
+				<li class="filter">
+					<span id="cityLabel">City:</span>
+					<select autofocus id="city" name="city">
+						<option value="Washington D.C." selected="selected">Washington D.C.</option>
+					</select>
+				</li>
+				<li class="filter">
+					<span>Neighborhood:</span>
+					<input id="nameFilter" type="text" autocomplete="off" data-keyup="search" data-completed="search" />
+				</li>
+				<li id="display" class="filter">
+					<span>Display:</span>
+					<ul class="buttonList">
+						<li><button id="tableButton" class="displayButton" data-view="table" data-click="changeView">
+								<i class="icon icon-table" data-view="table" data-click="changeView"></i> Table
+							</button>
+						</li>
+						<li>
+							<button id="mapButton" class="displayButton" data-view="map" data-click="changeView">
+								<i class="icon icon-map" data-view="map" data-click="changeView"></i> Map
+							</button>
+						</li>		
+					</ul>
+				</li>												
+			</ul>
+			<div id="content"></div>
+		</div>
+	</div>
+
+	<!-- Templates -->
+	<script type="text/template" id="crashTable">
+		<table>
+			<thead>
+				<tr>
+					<th class="numeric"><button id="id" href="#" data-click="sort">Id</button></th>
+					<th><button id="name" href="#" data-click="sort">Neighborhood</button></th>
+					<th class="numeric"><button id="n2010" href="#" data-click="sort">2010</button></th>
+					<th class="numeric"><button id="n2011" href="#" data-click="sort">2011</button></th>
+					<th class="numeric"><button id="n2012" href="#" data-click="sort">2012</button></th>
+					<th class="numeric"><button id="n2013" href="#" data-click="sort">2013</button></th>
+					<th class="numeric"><button id="n2014" href="#" data-click="sort">2014</button></th>
+					<th class="numeric"><button id="total" href="#" data-click="sort">Total</button></th>
+				</tr>
+			</thead>
+			{{tbody}}
+		</table>
+		<ul id="scrollUp" class="buttonList">
+			<li><button data-click="scroll"><i class="icon icon-arrowUp" data-click="scroll"></i> Scroll To Top</button></li>	
+		</ul>		
+	</script>
+
+	<script type="text/template" id="crashTableRow">
+		<td class="numeric">{{id}}</td>
+		<td>{{name}}</td>
+		<td class="numeric">{{n2010}}</td>
+		<td class="numeric">{{n2011}}</td>
+		<td class="numeric">{{n2012}}</td>
+		<td class="numeric">{{n2013}}</td>
+		<td class="numeric">{{n2014}}</td>
+		<td class="numeric total">{{total}}</td>
+	</script>
+
+	<script type="text/template" id="mapView">
+		<ul id="yearList" class="buttonList">
+			<li><button id="n2010" data-click="changeYear">2010</button></li>
+			<li><button id="n2011" data-click="changeYear">2011</button></li>
+			<li><button id="n2012" data-click="changeYear">2012</button></li>
+			<li><button id="n2013" data-click="changeYear">2013</button></li>
+			<li><button id="n2014" data-click="changeYear">2014</button></li>
+			<li><button id="total" data-click="changeYear">All Years</button></li>
+
+		</ul>
+		<ul id="cycleList" class="buttonList">
+			<li>
+				<button id="cycle" data-click="toggleCycle">
+					<i class="icon icon-cycle" data-click="toggleCycle"></i> 
+					<span data-click="toggleCycle">Cycle Neighborhoods</span>
+				</button>
+			</li>			
+		</ul>
+		<div id="map"></div>
+		<div id="neighborhoodDetail"></div>
+	</script>
+
+	<script type="text/template" id="neighborhoodDetailView">
+		<div class="title"><h2>{{name}}</h2></div>
+		<p>Total Crashes: {{total}}</p>
+		<ul id="graphList">
+			<li>
+				<span class="graph">
+					<span class="graphBar {{bar2010}}" style="height: {{height2010}}%">
+						<span class="graphQuantity">{{n2010}}</span>
+					</span>
+					<h6 class="graphYear">2010</h6>
+				</span>
+			</li>
+			<li>
+				<span class="graph">
+					<span class="graphBar {{bar2011}}" style="height: {{height2011}}%">
+						<span class="graphQuantity">{{n2011}}</span>
+					</span>
+					<h6 class="graphYear">2011</h6>
+				</span>
+			</li>
+			<li>
+				<span class="graph">
+					<span class="graphBar {{bar2012}}" style="height: {{height2012}}%">
+						<span class="graphQuantity">{{n2012}}</span>
+					</span>
+					<h6 class="graphYear">2012</h6>
+				</span>
+			</li>
+			<li>
+				<span class="graph">
+					<span class="graphBar {{bar2013}}" style="height: {{height2013}}%">
+						<span class="graphQuantity">{{n2013}}</span>
+					</span>
+					<h6 class="graphYear">2013</h6>
+				</span>
+			</li>
+			<li>
+				<span class="graph">
+					<span class="graphBar {{bar2014}}" style="height: {{height2014}}%">
+						<span class="graphQuantity">{{n2014}}</span>
+					</span>
+					<h6 class="graphYear">2014</h6>
+				</span>
+			</li>												
+		</ul>
+	</script>	
+
+	<script type="text/javascript">
+		app.initialize();
+	</script>
+</body>
+</html>

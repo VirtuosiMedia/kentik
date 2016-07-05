@@ -1,0 +1,171 @@
+/*
+ * Reset styles using Eric Meyer's CSS reset as inspiration (http://meyerweb.com/eric/tools/css/reset/) 
+ */
+a, abbr, address, article, aside, audio, b, bdi, bdo, blockquote, body, br, button, canvas, caption, cite, code, col, 
+colgroup, command, datalist, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form,
+h1, h2, h3, h4, h5, h6, header, hgroup, i, iframe, img, ins, keygen, kbd, label, legend, li, map, mark, menu, 
+meter, nav, object, ol, optgroup, option, output, p, param, pre, progress, q, rp, rt, ruby, s, samp, section, select, 
+small, source, span, strong, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, track, u, ul, 
+var, video, wbr {
+	font: inherit;
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+
+/**
+ * Typography
+ */
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/Open_Sans/OpenSans-Regular.ttf');
+}
+
+/**
+ * Text
+ */
+a {
+	color: #F69;
+	text-decoration: none;
+}
+
+/**
+ * Application
+ */
+html {height: 100%;}
+body {
+	background: #222222;
+	background: -moz-linear-gradient(top, #222222 0%, #1A1A1A 100%);
+	background: -webkit-linear-gradient(top, #222222 0%, #1A1A1A 100%);
+	background: linear-gradient(to bottom, #222222 0%, #1A1A1A 100%);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	color: #999;
+	display: block;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	height: 100%;
+}
+
+#logoContainer {
+	animation: grow 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0ms 1 normal forwards;
+	-webkit-animation: grow 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0ms 1 normal forwards;	
+	background: #000;
+	border-radius: 0.25rem;
+	display: block;
+	height: auto;
+	left: 50%;
+	margin: -10% 0 0 -20%;
+	padding: 1rem;
+	position: absolute;
+	top: 50%;
+	width: 40%;
+}
+#logo {
+	animation: fadeIn 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 200ms 1 normal forwards;
+	-webkit-animation: fadeIn 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 200ms 1 normal forwards;	
+	background: url(../images/logo.png);
+	background-size: cover;
+	display: inline-block;
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+	height: 80px;
+	margin: 0 auto;
+	opacity: 0;
+	transition: all linear 100ms;
+	width: 384px;
+}
+#logo:hover, #logo:focus {
+	filter: grayscale(0%);
+	outline: none;
+	-webkit-filter: grayscale(0%);	
+}
+#title {
+	color: #F69;
+	float: right;
+	list-style: none;
+}
+#title li {
+	animation: grow 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 300ms 1 normal forwards;
+	-webkit-animation: grow 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 300ms 1 normal forwards;
+	transform: scale(0);	
+}
+#title li:last-child {animation-delay: 400ms;}
+
+/**
+ * Button Lists
+ */
+#buttonList {
+	bottom: -2.4rem;
+	left: 0rem;
+	position: absolute;
+
+}
+.buttonList {
+	display: block;
+	list-style: none;
+	overflow: hidden;
+	width: 100%;
+}
+.buttonList li {
+	float: left;
+	margin-right: 0.25rem;
+}
+.buttonList a {
+	background: #000;
+	border: none;
+	border-radius: 0.25rem;
+	color: #999;
+	display: inline-block;
+	line-height: 1.6rem;
+	padding: 0.25rem 0.5rem;
+	transition: all linear 100ms;
+}
+.buttonList a:hover, .buttonList a.selected {
+	background: #111;
+	color: #F69;
+	cursor: pointer;
+}
+.buttonList a:focus {
+	color: #F69;
+	outline-color: #F69;
+}
+.buttonList .icon {
+	font-size: 1.1rem;
+	margin-top: -0.25rem;
+}
+
+#buttonList a {
+	animation: grow 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 200ms 1 normal forwards;
+	-webkit-animation: grow 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 200ms 1 normal forwards;
+	transform: scale(0);
+}
+#buttonList li:nth-child(2) a {animation-delay: 250ms;}
+#buttonList li:nth-child(3) a {animation-delay: 300ms;}
+#buttonList li:nth-child(4) a {animation-delay: 350ms;}
+#buttonList li:nth-child(5) a {animation-delay: 400ms;}
+
+/**
+ * Animations
+ */
+@keyframes grow {
+	from {transform: scale(0);}
+ 	to {transform: scale(1);}	
+}
+
+@-webkit-keyframes grow {
+	from {transform: scale(0);}
+ 	to {transform: scale(1);}
+}
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+ 	to {opacity: 1;}	
+}
+
+@-webkit-keyframes fadeIn {
+	from {opacity: 0;}
+ 	to {opacity: 1;}
+}

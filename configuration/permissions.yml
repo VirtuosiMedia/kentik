@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars: 
+    web_root: /app
+  sudo: yes
+  tasks:
+  - name: ensure app files have correct permissions
+    file: path=/app owner=vagrant group=vagrant mode=0644 recurse=yes

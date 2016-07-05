@@ -1,0 +1,9 @@
+{
+    "name": "Kentik",
+    "version": "0.0.1",
+    "dependencies": {
+        "d3":          "^4.1.0",
+        "threejs":     "https://raw.githubusercontent.com/mrdoob/three.js/master/build/three.min.js"
+    },
+    "analytics": false
+}
