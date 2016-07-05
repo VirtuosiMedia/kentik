@@ -33,7 +33,7 @@ The project took a little longer than I anticipated, around 20 hours. Having not
 ## Issues
 
 - This demo application has not been extensively tested for cross-browser compatibility. It has only been tested on Google Chrome for Windows.
-- Because of the issues I had with D3's newer version, I had to hotlink the external vendor files to older versions. Given more time, I would nail this down so that it becomes part of the build process instead and transition to the newer version.
+- Because of the issues I had with D3's newer version, I had to manually revert vendor files to older versions. Given more time, I would nail this down so that it becomes part of the build process instead and transition to the newer version.
 - The dropdown menu in the navbar isn't fully keyboard navigable. This was a late addition and would just need more time.
 - There is one particular UX edge case that I haven't yet solved in terms of what an optimal solution should be. When searching for 'Brightwood', both 'Brightwood' and 'Brightwood Park' appear as options. Even when selecting 'Brightwood', it will not eliminate 'Brightwood Park' from the search as it is still valid for the query. While the code isn't the problem, I would want to do some additional research for this use case to look for a best practice.
 
