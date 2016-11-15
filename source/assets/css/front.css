@@ -155,7 +155,7 @@ body {
 }
 #imageList li {
 	clear: both;
-	margin-top: 1rem;
+	margin-top: 1px;
 	width: 100%;
 }
 #imageList a {
