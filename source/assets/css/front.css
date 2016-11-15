@@ -147,6 +147,23 @@ body {
 #buttonList li:nth-child(4) a {animation-delay: 350ms;}
 #buttonList li:nth-child(5) a {animation-delay: 400ms;}
 
+#imageList {
+	bottom: -2.4rem;
+	left: 0rem;
+	position: absolute;
+}
+#imageList li {
+	clear: both;
+	width: 100%;
+}
+#imageList a {
+	animation: grow 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 200ms 1 normal forwards;
+	-webkit-animation: grow 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 200ms 1 normal forwards;
+	transform: scale(0);
+	width: 100%;
+}
+
+
 /**
  * Animations
  */
