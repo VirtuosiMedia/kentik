@@ -177,7 +177,7 @@ body {
 #imageList li:nth-child(12) a {animation-delay: 750ms;}
 #imageList li:nth-child(13) a {animation-delay: 800ms;}
 #imageList li:nth-child(14) a {animation-delay: 850ms;}
-#imageList li:nth-child(16) a {animation-delay: 900ms;}
+#imageList li:nth-child(15) a {animation-delay: 900ms;}
 #imageList li:nth-child(16) a {animation-delay: 950ms;}
 #imageList li:nth-child(17) a {animation-delay: 1000ms;}
 #imageList li:nth-child(18) a {animation-delay: 1050ms;}
@@ -193,13 +193,25 @@ body {
  * Animations
  */
 @keyframes grow {
-	from {transform: scale(0);}
- 	to {transform: scale(1);}	
+	from {
+		opacity: 0;
+		transform: scale(0);
+	}
+ 	to {
+		opacity: 1;
+ 		transform: scale(1);
+ 	}	
 }
 
 @-webkit-keyframes grow {
-	from {transform: scale(0);}
- 	to {transform: scale(1);}
+	from {
+		opacity: 0;
+		transform: scale(0);
+	}
+ 	to {
+		opacity: 1;
+ 		transform: scale(1);
+ 	}
 }
 
 @keyframes fadeIn {
