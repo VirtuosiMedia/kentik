@@ -148,12 +148,13 @@ body {
 #buttonList li:nth-child(5) a {animation-delay: 400ms;}
 
 #imageList {
-	bottom: -2.4rem;
 	left: 0rem;
+	margin-top: 1rem;
 	position: absolute;
 }
 #imageList li {
 	clear: both;
+	margin-top: 1rem;
 	width: 100%;
 }
 #imageList a {
