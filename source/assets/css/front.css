@@ -150,7 +150,7 @@ body {
 
 #imageList {
 	left: 0rem;
-	margin-top: 1rem;
+	margin-top: 1px;
 	position: absolute;
 }
 #imageList li {
